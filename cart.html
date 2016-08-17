@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  	
+  	<style type="text/css">
+  		body{
+	font-size: 14px;
+    background-color: #f3f3f3;
+    color: #212121;
+    text-rendering: geometricPrecision;
+}
+  	</style>
+</head>
+<body>
+<header>
+<div class="navbar-fixed">
+<nav>
+  <div class="nav-wrapper">  
+    <a href="#" class="brand-logo center">Cart Page</a>    
+    <div class="menuBox">
+      <a href="#" class="button-collapse show-on-large right"><i class="fa fa-fw fa-shopping-cart">Cart</i> </a>      
+    </div>
+  </div>
+</nav>
+</div>
+</header>
+<section>
+	<div class="container">
+		<div class="row">
+        <div class="card z-depth-1">          
+          <div class="card-content">
+            <div class="row">
+              <table class="responsive-table bordered highlight cartTable">
+                    Nothing Found
+              </table><br>
+              <a href="#"><button class="btn waves-effect waves-light z-depth-1 clear" style="background-color:#512dab; margin-right:25px;">Clear Items</button></a>
+              <a href="#"><button class="btn waves-effect waves-light z-depth-1" style="background-color:#512dab;">Check Out</button></a>
+            </div>
+          </div>
+        </div>
+        
+
+    </div> 
+	</div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+	    var chkLocalStorage = chkLocalStorage();
+	    if(chkLocalStorage){
+	        //getCart();
+	    }else{
+	        alert('No localStorage support. Please upgrade your browser to latest versions.');
+	    }
+	    getCart();
+	    function getCart(){
+	    	var total_price = 0;
+	    	var html = '';
+	    	html += '<tr>\
+                            <th>Name</th>\
+                            <th>Quantity</th>\
+                            <th>Price</th>\
+                            <th>Sub Total</th>\
+                          </tr>';
+	        for(var i in localStorage){
+	            var data = JSON.parse(localStorage.getItem(i));
+	            var name = data[0];
+	            var quantity = data[1];
+	            var price = parseInt(quantity * data[2]);
+	            var id = i;
+	            html += '<tr>\
+                        <td>'+name+'<br><a href="#" class="remove" data-pid="'+id+'">remove</a></td>\
+                        <td><input type="text" class="q-'+id+'" value="'+quantity+'" style="width:60px;"/><a href="#" class="save" data-pid="'+id+'">save</a></td>\
+                        <td>'+price+'</td>\
+                        <td>'+price+'</td>\
+                      </tr>';
+                total_price += price;
+	        }
+	        html += '<tr>\
+                        <td></td>\
+                        <td></td>\
+                        <td>Total</td>\
+                        <td>'+total_price+'</td>\
+                      </tr>';
+            if(total_price == 0){
+            	alert("Nothing found in the cart");
+            }else{
+            	$('.cartTable').html(html);
+            }
+            
+	    }
+	    $('.save').click(function(){
+	        var key = $(this).attr('data-pid');
+	        var data = JSON.parse(localStorage.getItem(key));
+            var name = data[0];
+            var quantity = $('.q-'+key).val();
+            var price = data[2];
+
+            var p = [name, quantity, price];
+	        localStorage.setItem(key, JSON.stringify(p));
+	        Materialize.toast("Quantity updated for "+name,4000);
+	        setInterval(refresh, 4000);
+	    });
+
+	    $('.remove').click(function(){
+	        var key = $(this).attr('data-pid');
+	        localStorage.removeItem(key); 
+	        Materialize.toast("Item removed from cart",4000);
+	        setInterval(refresh, 4000);
+	    });
+	    $('.clear').click(function(){
+	        for(var i in localStorage){
+	            localStorage.removeItem(i); 
+	        }
+	        Materialize.toast("All items removed from cart",4000);
+	        setInterval(refresh, 4000);
+	    });
+	    function refresh(){
+	        window.location = 'cart.html';
+	    }
+	    function chkLocalStorage(){
+	        if (typeof(Storage) !== "undefined") {
+	            // Code for localStorage.
+	            return true;
+	        } else {
+	            // Sorry! No Web Storage support..
+	            return false;
+	        }
+	    }
+
+	});
+</script>
+</body>
+</html>
