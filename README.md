@@ -21,7 +21,7 @@ The above two python files are built on python <b>2.7.12</b>. Please install the
 <a href="http://www.sudeepst.com/fb.html">Click Here</a> for a working demo.</li>
 <li>
 <h2>Task 2 : Task CV</h2>
-<a href="http://www.sudeepst.com/fb.html">Click Here</a> for a working demo.</li>
+<a href="http://www.sudeepst.com">Click Here</a> for a working demo.</li>
 </li>
 <li>
 <h2>Task 3 : Shopping Cart Task</h2>
