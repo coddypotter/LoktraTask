@@ -26,7 +26,7 @@ The above two python files are built on python <b>2.7.12</b>. Please install the
 <li>
 <h2>Task 3 : Shopping Cart Task</h2>
 <b>product.html, cart.html, main.js</b> file contain the front end code of shopping cart application.<br>
-<b>imgs/</b> folder contains supporting images
+<b>imgs/</b> folder contains supporting images<br><br>
 <a href="http://sudeepst.com/product.html">Click Here</a> for a working demo.</li>
 </li>
 </ol>
