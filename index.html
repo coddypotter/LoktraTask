@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Donations Task</title>
+		<script>
+		  window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : '1823798254516318',
+		      xfbml      : true,
+		      version    : 'v2.7'
+		    });
+		  };
+
+		  (function(d, s, id){
+		     var js, fjs = d.getElementsByTagName(s)[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement(s); js.id = id;
+		     js.src = "//connect.facebook.net/en_US/sdk.js";
+		     fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+		</script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+		<style type="text/css">			
+		
+		body{
+			font-size: 14px;
+		  	background-color: #f3f3f3;
+			text-rendering: geometricPrecision;
+		}
+		.container{
+			width: 50%;
+			margin-top: 70px;
+			margin-bottom: 10px;
+			margin-left: 20%;
+			font-family: 'Ubuntu', sans-serif;
+
+		}
+		.input-symbol-euro {
+		    position: relative;
+		}
+		.input-symbol-euro input {
+		    padding-left:18px;
+		}
+		.input-symbol-euro:before {
+		    position: absolute;
+		    bottom: 0px;
+		    content:"$";
+		    left: 10px;
+		    padding: 0;
+		    font-size: 26px;
+		}
+		.bubble {
+		    position: relative;
+		    width: 100%;
+		    height: 80px;
+		    padding: 0px;
+		    background: #212121;
+		    -webkit-border-radius: 5px;
+		    -moz-border-radius: 5px;
+		    border-radius: 5px;
+		}
+
+	  	.bubble:after {	
+		    content: "";
+		    position: absolute;
+		    bottom: -13px;
+		    left: 85%;
+		    border-style: solid;
+		    border-width: 13px 12px 0;
+		    border-color: #212121 transparent;
+		    display: block;
+		    width: 0;
+		    z-index: 1;
+		}
+		.bubble .content{
+			z-index: 2;
+			color: #fff;
+			text-align: center;
+			padding: 20px;
+			font-weight: 600;
+			font-size: 24px;
+		}
+		.box{
+			width: 100%;
+			margin-top: 20px;
+			margin-bottom: 10px;
+			border:solid 2px #ccc;
+			border-radius: 0px;
+		  	background-color: #fff;
+		  	box-sizing: border-box;
+		  	color: grey;
+		}
+		.progressBar{
+			width: 100%;
+			max-width: 100%;
+			height: 20px;
+			border-bottom: solid 2px #ccc;
+		}
+		.fill{
+			width: 0%;
+			max-width: 100%;
+			background-color: #ff8000;
+			height: 20px;
+		}
+		.buttonArea{
+			width: 100%;
+			margin-top: 20px;
+			margin-bottom: 10px;
+			border-radius: 0px;
+		  	box-sizing: border-box;
+		  	color: grey;
+		}
+		.boxContent{
+			padding: 28px;			
+		}
+		.boxContent > div{
+			margin-top: 10px;
+		}
+		.boxContent .content{
+			font-size: 24px;
+		}
+		.orangeColor{
+			color: #ff8000;
+		}
+		.form{
+			padding-top: 25px;
+		}
+		input[type=text]{
+			width: 50%;
+			height: 40px;
+			padding: 5px;
+			border: solid 2px #bbb;
+			border-radius: 4px;
+			font-size: 24px;
+			padding-left: 26px;
+		}
+		.button, .donate{
+			float: left;
+			width: 46%;
+			height: 40px;
+			padding: 5px;
+			padding-top: 10px;
+			border: solid 2px #bbb;
+			border-radius: 4px;
+			font-size: 24px;
+			text-align: center;
+			cursor: pointer;
+		}
+		.button:hover, .donate:hover{
+			 box-shadow: 2px 1px 5px #888888;
+		}
+		.donate{
+			float: right;
+			width: 38%;
+		}
+		.green{
+			color: #fff;
+			background-color: #00b900;
+			border: none;
+		}
+		a{
+			color: #2196F3;
+			font-size: 18px;
+			text-decoration: none;
+		}
+		</style>
+	</head>
+	<body>
+
+	<div class="container">
+		<div class="bubble">
+			<div class="content bc">$148 needed for</div>
+		</div>
+		<div class="box">
+			<div class="progressBar">
+				<div class="fill">&nbsp;</div>
+			</div>
+			<div class="boxContent">
+				<div class="content">
+					<span class="orangeColor">Only 3 days left</span> to fund this project.<br><br>Join the <span class="countUsers"></span> other donors who have already supported this project. Every dollar helps.
+				</div>
+				<div class="form">
+					<span class="input-symbol-euro">
+					    <input type="text" class="currency" />
+					</span>
+					<div class="donate button green" style="color: #fff;">Give Now</div>
+				</div>
+				<div class="why"><a href="#"><i>Why give $50?</i></a></div>
+			</div>
+		</div>
+		<div class="buttonArea">
+			<div class="save button">Save for later</div>
+			<div class="share button" style="margin-left: 20px;">Tell your friends</div>
+		</div>
+	</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(e){
+				var target = "1000";//Target money to be raised in dollars
+				var till = 200; //User donated till now in dollars
+				//Init progressBar
+				fill(20);
+				//Update bubble content
+				updateBubble();
+				var countUsers = 3
+				//Initialising the user count to 3
+				//For demo we are doing 3 users at start
+				$('.countUsers').text(countUsers);//Can be later connected to a DB of donated people
+				/////////////////////////////////
+				//Donate button handler
+				$('.donate').click(function(){
+					var currency = parseInt($('.currency').val());
+					if(currency == 0){
+						alert("Please enter a value");
+					}else{
+						var res = target - (currency + till);
+						var fillWidth = ((currency + till) / target) * 100;
+						till = currency + till;
+						if(fillWidth < 100){
+							fill(fillWidth);
+						}else{
+							fill('110');
+						}						
+					}
+					//Update bubble content
+					updateBubble();
+					//Update donors count
+					countUsers = countUsers + 1;
+					$('.countUsers').text(countUsers);					
+				});
+				//Save Button Handler
+				$('.save').click(function(){
+					alert("Saved!");
+				});
+				//Share Button Handler
+				$('.share').click(function(){
+					//Facebook post on wall
+					FB.login(function(){  
+  						FB.api('/me/feed', 'post', {message: 'Yay, I donated!'});
+					}, {scope: 'publish_actions'});
+
+					//Tweet using URL
+					var twtLink = 'http://twitter.com/home?status=Yay, I donated!';
+ 					window.open(twtLink,'_blank');
+				});
+				//Function to update the bubble				
+				function updateBubble(){
+					var calc = target - till;
+					if(calc > 0){
+						$('.bc').text('$'+calc+' still needed for this project');
+					}else if(calc == '0'){
+						$('.bc').text('$1000 successfully raised.');
+					}else{
+						$('.bc').text('$'+Math.abs(calc)+' more has been raised for this project');
+					}
+				}
+				//Function to fill the progress bar
+				function fill(fillWidth){
+
+
+					var currentWidth = $(".fill").width() / $('.fill').parent().width() * 100;
+					
+					fillWidth = Math.round(fillWidth);
+					fillWidth = Math.abs(fillWidth);
+					
+					var i = 0;
+					//Smooth filling effect
+					//Change the time {10} to desired value
+					var f = setInterval(function(){
+						if(i == fillWidth){
+							clearInterval(f);
+						}else{
+							$('.fill').css('width', parseInt(i)+'%');
+						}
+						i = i + 1;
+					},10);
+				}
+			});
+		</script>
+	</body>
+</html>
