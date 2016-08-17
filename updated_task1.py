@@ -12,7 +12,7 @@ def reverseHash(n):
         i = i+1
         result = letters[n%37] + result
         n=n/37
-        if i == 7: #7 because in problem statement it has been given 7 letter string
+        if i == 7:
             break
     
     return result
