@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Digital Signature
+	</title>
+	<style type="text/css">
+		.m-signature-pad {
+		  position: absolute;
+		  font-size: 50px;
+		  width: 75%;
+		  height: 40%;
+		  top: 15%;
+		  left: 5%;
+		  border: 1px solid #bbb;
+		  background-color: #fff;
+		  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.08) inset;
+		  border-radius: 4px;
+		}
+
+		.m-signature-pad--body {
+		  position: absolute;
+		  left: 20px;
+		  right: 20px;
+		  top: 20px;
+		  bottom: 60px;
+		}
+
+		.m-signature-pad--body canvas {
+		    position: absolute;
+		    left: 0;
+		    top: 0;
+		    width: 100%;
+		    height: 100%;
+		    border-radius: 4px;
+		    box-shadow: 0 0 5px rgba(0, 0, 0, 0.02) inset;
+		  }
+
+		.m-signature-pad--footer {
+		  position: absolute;
+		  left: 20px;
+		  right: 20px;
+		  bottom: 20px;
+		  height: 40px;
+		}
+		#save{
+			position: absolute;
+			bottom: 0px;
+			right: 0px;
+			width: 400px;
+			height: 100px;
+			font-size: 60px;
+		}
+	</style>
+</head>
+<body>
+<div id="signature-pad" class="m-signature-pad">
+    <div class="m-signature-pad--body">
+      <canvas></canvas>
+    </div>
+    
+</div>
+<div class="footer">
+	<button id="save">Save</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="signature_pad.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var wrapper = document.getElementById("signature-pad"),
+	    canvas = wrapper.querySelector("canvas"),
+	    signaturePad;
+		function resizeCanvas() {
+		    var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+		    canvas.width = canvas.offsetWidth * ratio;
+		    canvas.height = canvas.offsetHeight * ratio;
+		    canvas.getContext("2d").scale(ratio, ratio);
+		}
+
+		window.onresize = resizeCanvas;
+		resizeCanvas();
+
+		signaturePad = new SignaturePad(canvas);
+		$('#save').click(function(){
+			if (signaturePad.isEmpty()) {
+		        alert("Please do signature first.");
+		    } else {
+		        window.open(signaturePad.toDataURL());
+		    }
+		});
+	});
+</script>
+</body>
+</html>
